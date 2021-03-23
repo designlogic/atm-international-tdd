@@ -1,4 +1,6 @@
-﻿namespace ATMInternational.Data
+﻿using System;
+
+namespace ATMInternational.Data
 {
     public class AtmLogic : IAtmLogic
     {
@@ -19,7 +21,7 @@
         /// <returns>True if the deposit was successful; otherwise false</returns>
         public bool Deposit(int coinsToDeposit)
         {
-            return false;
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -30,7 +32,7 @@
         /// <returns>True if the withdrawal was successful; otherwise false</returns>
         public bool Withdrawal(int coinsToWithdrawal)
         {
-            return false;
+            throw new NotImplementedException();
         }
     }
 }
