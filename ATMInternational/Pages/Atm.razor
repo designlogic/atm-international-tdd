@@ -1,64 +1,152 @@
 ﻿@page "/"
+@using ATMInternational.Data
+@using ATMInternational.Components
 
+<div class="row justify-content-md-center">
+    <div class="col-md-auto">
+        <div class="frame">
+            <div class="atm-header">
+                <div class="logo-panel img-fluid">
+                    <img src="/BankLogo.png" />
+                </div>
+                <div class="account-balance-panel">
+                    <div class="account-balance">
 
-@**@
-
-
-<div class="frame">
-    
-    <div class="atm-header">
-        
-       
-        
-        
-        <div class="account-balance-panel">
-            <div class="account-balance">
-
-                <p>Account Balance</p>
-                <h1>230</h1>
+                        <p>Account Balance</p>
+                        <h1>@AtmLogic.AccountBalance.ToString()</h1>
+                    </div>
+                    <div class="coin-animation"></div>
+                </div>
             </div>
-            <div class="coin-animation"></div>
+
+            @if (state != State.Message)
+            {
+                <nav class="navbar navbar-expand-lg navbar-light bg-light tabs">
+                    <div class="container-fluid">
+                        <div class="collapse navbar-collapse" id="navbarScroll">
+                            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" @onclick="@ShowDepositScreen">Deposit</a>
+                                </li>
+                                <li class="nav-item">
+                                    <div class="separator"></div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" @onclick="@ShowWithdrawalScreen">Withdrawal</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            }
+
+            <div class="row justify-content-md-center @(state == State.Deposit ? "": "collapse")">
+                <div class="col-md-auto">
+                    <div class="content">
+                        <div class="page-title">
+                            <h2>Deposit</h2><img src="/Coin.png" />
+                        </div>
+                        <ATMInternational.Components.KeypadComponent @ref="depositKeypadComponent" EnterClicked="@OnDeposit"/>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row justify-content-md-center @(state == State.Withdrawal ? "": "collapse")">
+                <div class="col-md-auto">
+                    <div class="content">
+                        <div class="page-title">
+                            <h2>Withdrawal</h2><img src="/Coin.png" />
+                        </div>
+                        <ATMInternational.Components.KeypadComponent @ref="withdrawalKeypadComponent" EnterClicked="@OnWithdrawal" />
+                    </div>
+                </div>
+            </div>
+
+            @if (state == State.Message)
+            {
+                <div class="row justify-content-md-center">
+                    <div class="col-md-auto">
+                        <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+                            <div class="card-header">Sorry</div>
+                            <div class="card-body">
+                                <p class="card-text">@AtmLogic.UserMessage</p>
+                                <button type="button" class="btn btn-primary btn-block" @onclick="@HideMessageScreen">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
-
     </div>
-
-    <div class="atm-body">
-      
-        <div class="tabs">
-
-            @*<div class="tab-selected">Deposit</div>
-            <div class="tab-normal">Withdraw</div>*@
-            
-            <ul class="nav nav-pills">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Deposit</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Withdraw</a>
-                </li>
-            </ul>
-        </div>
-      
-    </div>
-    
-    <table>
-        <tr>
-            <td><div class="btn btn-primary">1</div></td>
-            <td><div class="btn btn-primary">2</div></td>
-            <td><div class="btn btn-primary">3</div></td>
-        </tr>
-        <tr>
-            <td><div class="btn btn-primary">4</div></td>
-            <td><div class="btn btn-primary">5</div></td>
-            <td><div class="btn btn-primary">6</div></td>
-        </tr>
-
-    </table>
-
-    
-    
-    
-    
-    
-
 </div>
+
+
+@code
+{
+    [Inject]
+    IAtmLogic AtmLogic { get; set; }
+
+    private State state = State.Deposit;
+    private State previousState = State.Deposit;
+
+    private KeypadComponent depositKeypadComponent;
+    private KeypadComponent withdrawalKeypadComponent;
+
+
+    private void OnDeposit(int coinsToDeposit)
+    {
+        var depositSuccessful = AtmLogic.Deposit(coinsToDeposit);
+
+        if (!depositSuccessful)
+        {
+            ShowMessageScreen();
+            return;
+        }
+
+        depositKeypadComponent.ClearValue();
+    }
+
+    private void OnWithdrawal(int coinsToWithdrawal)
+    {
+        var withdrawalSuccessful = AtmLogic.Withdrawal(coinsToWithdrawal);
+
+        if (!withdrawalSuccessful)
+        {
+            ShowMessageScreen();
+            return;
+        }
+
+        withdrawalKeypadComponent.ClearValue();
+    }
+
+    private void ShowDepositScreen()
+    {
+        state = State.Deposit;
+    }
+
+    private void ShowWithdrawalScreen()
+    {
+        state = State.Withdrawal;
+    }
+
+    private void ShowMessageScreen()
+    {
+        previousState = state;
+        state = State.Message;
+    }
+
+    private void HideMessageScreen()
+    {
+        state = previousState;
+    }
+
+    private enum State
+    {
+        Deposit,
+        Withdrawal,
+        Message
+    }
+
+}

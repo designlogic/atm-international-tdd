@@ -1,0 +1,64 @@
+﻿
+
+<div class="keypad-value-panel text-right">
+<h1 align="right">@value</h1>
+</div>
+<table class="keypad">
+    <tr>
+        <td><button type="button" class="btn btn-outline-dark" @onclick="@(()=> OnNumberClicked(1))">1</button></td>
+        <td><button type="button" class="btn btn-outline-dark" @onclick="@(()=> OnNumberClicked(2))">2</button></td>
+        <td><button type="button" class="btn btn-outline-dark" @onclick="@(()=> OnNumberClicked(3))">3</button></td>
+        <td><button type="button" class="btn btn-outline-success btn-action" @onclick="@OnEnterClicked">Enter</button></td>
+    </tr>
+    <tr>
+        <td><button type="button" class="btn btn-outline-dark" @onclick="@(()=> OnNumberClicked(4))">4</button></td>
+        <td><button type="button" class="btn btn-outline-dark" @onclick="@(()=> OnNumberClicked(5))">5</button></td>
+        <td><button type="button" class="btn btn-outline-dark" @onclick="@(()=> OnNumberClicked(6))">6</button></td>
+        <td><button type="button" class="btn btn-outline-danger btn-action" @onclick="@OnCancelClicked">Cancel</button></td>
+    </tr>
+    <tr>
+        <td><button type="button" class="btn btn-outline-dark" @onclick="@(()=> OnNumberClicked(7))">7</button></td>
+        <td><button type="button" class="btn btn-outline-dark" @onclick="@(()=> OnNumberClicked(8))">8</button></td>
+        <td><button type="button" class="btn btn-outline-dark" @onclick="@(()=> OnNumberClicked(9))">9</button></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td colspan="3"><button type="button" class="btn btn-outline-dark btn-zero" @onclick="@(()=> OnNumberClicked(0))">0</button></td>
+        <td></td>
+    </tr>
+</table>
+
+
+@code {
+
+    private string value = "";
+
+    [Parameter]
+    public EventCallback<int> EnterClicked { get; set; }
+
+    public void ClearValue()
+    {
+        value = "";
+    }
+
+    private void OnNumberClicked(int number)
+    {
+        value += number;
+    }
+
+    private void OnCancelClicked()
+    {
+        value = "";
+    }
+
+    private void OnEnterClicked()
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            EnterClicked.InvokeAsync(0);
+            return;
+        }
+
+        EnterClicked.InvokeAsync(int.Parse(value));
+    }
+}

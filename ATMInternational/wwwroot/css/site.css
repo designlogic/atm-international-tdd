@@ -58,14 +58,7 @@ a, .btn-link {
     }
 }
 
-.coin-animation {
-    height: 150px;
-    width: 150px;
-    margin-left: 20px;
-    background: url("/CoinSprite.png");
-    animation: sprite 1.0s steps(6) infinite;
-    transform: translate(-20%, -20%) scale(0.7);
-}
+
 
 .frame {
     background-color: white;
@@ -80,7 +73,6 @@ a, .btn-link {
     left: 2%;
     width: 1200px;
     margin: auto;
-    pointer-events: none;
     margin-top: 100px;
     display: flex;
     flex-direction: column;
@@ -92,24 +84,28 @@ a, .btn-link {
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: space-between;
 }
 
-.atm-body {
- 
+
+.logo-panel {
+    padding-top: 20px;
+    padding-left: 25px;
+}
+
+.logo-panel img {
+    height: 75px;
 }
 
 .account-balance-panel {
     padding-top: 10px;
-    padding-left: 40px;
     display: flex;
 }
-
 
 .account-balance p {
     padding: 0;
     margin: 0;
-    margin-top: 20px;
+    margin-top: 18px;
 }
 
 .account-balance h1 {
@@ -118,8 +114,105 @@ a, .btn-link {
     text-align: right;
 }
 
+.coin-animation {
+    height: 150px;
+    width: 150px;
+    background: url("/CoinSprite.png");
+    animation: sprite 1.0s steps(6) infinite;
+    transform: translate(-0%, -18%) scale(0.7);
+    margin-right: 0;
+    padding-right:0;
+}
+
+.coin-static {
+    height: 100px;
+    width: 150px;
+    background: url("/CoinSprite.png");
+    transform: translate(-20%, -18%) scale(0.2);
+    margin-right: 0;
+    padding-right: 0;
+}
+
 .tabs {
-    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.separator {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 1px;
+    height: 20px;
+    background-color: darkgrey;
 }
 
 
+.blue {
+    background-color: blue;
+}
+
+.red {
+    background-color: red;
+}
+
+.card {
+    margin-top: 150px;
+    width: 350px;
+}
+
+.card-header {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+.keypad {
+    width: 100px;
+}
+
+.keypad .btn-outline-dark {
+    width: 80px;
+    height: 60px;
+    margin: 5px;
+}
+
+.keypad .btn-action {
+    width: 200px;
+    height: 60px;
+    margin: 5px;
+}
+
+.keypad .btn-zero {
+    width: 265px;
+    height: 60px;
+}
+
+.keypad-value-panel {
+    width: 475px;
+    border-bottom: gray 2px solid;
+    margin-left: 5px;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+.keypad-value-panel h1{
+    height: 40px;
+}
+
+.page-title {
+    display: flex;
+    width: 500px;
+}
+.page-title img {
+    height: 40px;
+    margin-left: 20px;
+    margin-top: 10px;
+    
+}
+.page-title h2 {
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    font-size: 50px;
+    color: gray;
+           
+}
