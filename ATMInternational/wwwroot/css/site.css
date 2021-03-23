@@ -1,0 +1,125 @@
+@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+a, .btn-link {
+    color: #0366d6;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.content {
+    padding-top: 1.1rem;
+}
+
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid #26b050;
+}
+
+.invalid {
+    outline: 1px solid red;
+}
+
+.validation-message {
+    color: red;
+}
+
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
+
+
+
+
+@keyframes sprite {
+    to {
+        background-position: -900px
+    }
+}
+
+.coin-animation {
+    height: 150px;
+    width: 150px;
+    margin-left: 20px;
+    background: url("/CoinSprite.png");
+    animation: sprite 1.0s steps(6) infinite;
+    transform: translate(-20%, -20%) scale(0.7);
+}
+
+.frame {
+    background-color: white;
+    border-radius: 25px;
+    border: 1rem solid;
+    border-bottom-color: gray;
+    border-left-color: gray;
+    border-right-color: gray;
+    border-top-color: gray;
+    height: 800px;
+    top: 2%;
+    left: 2%;
+    width: 1200px;
+    margin: auto;
+    pointer-events: none;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+.atm-header {
+    background-color: lightgrey;
+    height: 120px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.atm-body {
+ 
+}
+
+.account-balance-panel {
+    padding-top: 10px;
+    padding-left: 40px;
+    display: flex;
+}
+
+
+.account-balance p {
+    padding: 0;
+    margin: 0;
+    margin-top: 20px;
+}
+
+.account-balance h1 {
+    padding: 0;
+    margin: 0;
+    text-align: right;
+}
+
+.tabs {
+    padding: 20px;
+}
+
+
