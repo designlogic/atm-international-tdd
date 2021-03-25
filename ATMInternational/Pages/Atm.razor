@@ -1,6 +1,5 @@
 ﻿@page "/"
-@using ATMInternational.Data
-@using ATMInternational.Components
+@using ATMInternational.Software
 
 <div class="row justify-content-md-center">
     <div class="col-md-auto">
@@ -22,9 +21,8 @@
             @if (state != State.Message)
             {
                 <nav class="navbar navbar-expand-lg navbar-light bg-light tabs">
-                    <div class="container-fluid">
-                        <div class="collapse navbar-collapse" id="navbarScroll">
-                            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                        <div class="float-lefte" id="navbarScroll">
+                            <ul class="navbar-nav">
                                 <li class="nav-item">
                                     <a class="nav-link" href="#" @onclick="@ShowDepositScreen">Deposit</a>
                                 </li>
@@ -37,7 +35,9 @@
 
                             </ul>
                         </div>
-                    </div>
+                        <div class="total-withdrawn-panel  @(state == State.Withdrawal ? "": "collapse")">
+                            <p>Total Daily Withdrawn amount <b>@AtmLogic.TotalDailyWithdrawal</b> coins</p>
+                        </div>
                 </nav>
             }
 
@@ -47,7 +47,7 @@
                         <div class="page-title">
                             <h2>Deposit</h2><img src="/Coin.png" />
                         </div>
-                        <ATMInternational.Components.KeypadComponent @ref="depositKeypadComponent" EnterClicked="@OnDeposit"/>
+                        <KeypadComponent @ref="depositKeypadComponent" EnterClicked="@OnDeposit"/>
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                         <div class="page-title">
                             <h2>Withdrawal</h2><img src="/Coin.png" />
                         </div>
-                        <ATMInternational.Components.KeypadComponent @ref="withdrawalKeypadComponent" EnterClicked="@OnWithdrawal" />
+                        <KeypadComponent @ref="withdrawalKeypadComponent" EnterClicked="@OnWithdrawal" />
                     </div>
                 </div>
             </div>
@@ -93,7 +93,6 @@
 
     private KeypadComponent depositKeypadComponent;
     private KeypadComponent withdrawalKeypadComponent;
-
 
     private void OnDeposit(int coinsToDeposit)
     {

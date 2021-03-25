@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ATMInternational.Data
+namespace ATMInternational.Software
 {
     public class AtmLogic : IAtmLogic
     {
@@ -8,6 +8,11 @@ namespace ATMInternational.Data
         /// User's account balance in coins
         /// </summary>
         public int AccountBalance { get; private set; }
+
+        /// <summary>
+        /// User's total daily withdrawal amount
+        /// </summary>
+        public int TotalDailyWithdrawal { get; private set; }
 
         /// <summary>
         /// Message to show the user

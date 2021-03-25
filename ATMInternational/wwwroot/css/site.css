@@ -135,7 +135,17 @@ a, .btn-link {
 
 .tabs {
     margin-bottom: 30px;
+    padding-left: 20px;
 }
+
+.total-withdrawn-panel {
+    font-size: 14px;
+    padding-top: 6px;
+    padding-left: 125px;
+    height: 30px;
+    color: gray;
+}
+
 
 .separator {
     margin-top: 10px;

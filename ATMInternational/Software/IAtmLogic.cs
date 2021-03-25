@@ -1,4 +1,4 @@
-﻿namespace ATMInternational.Data
+﻿namespace ATMInternational.Software
 {
     public interface IAtmLogic
     {
@@ -6,6 +6,11 @@
         /// User's account balance in coins
         /// </summary>
         int AccountBalance { get; }
+
+        /// <summary>
+        /// User's total daily withdrawal amount
+        /// </summary>
+        int TotalDailyWithdrawal { get; }
 
         /// <summary>
         /// Message to show the user
